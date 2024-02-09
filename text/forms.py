@@ -4,12 +4,9 @@ from django.forms import ModelForm
 from text.models import Text
 
 
-class TextForm(ModelForm):
-    forms = forms.Textarea()
+class InputTextForm(ModelForm):
+    url_hash = forms.CharField(label='Введите текст', widget=forms.Textarea(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Text
-        fields = ('text',)
-        labels = {
-            'text': 'Введите текст'
-        }
+        fields = ('url_hash',)

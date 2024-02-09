@@ -1,5 +1,6 @@
-from django.urls import path, include
+from django.urls import path
+from .views import *
 
 urlpatterns = [
-    path('', v)
+    path('', InputTextView.as_view(), name='input_text')
 ]
