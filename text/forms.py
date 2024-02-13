@@ -17,9 +17,9 @@ class InputTextForm(forms.ModelForm):
         fields = '__all__'
         required = '__all__'
         labels = {
-            'url_hash': 'Текст',
-            'is_temporary': 'Временн сообщение',
-            'datetime_of_deletion': 'Дата и время уничтожения текста'
+            'url_hash': 'Сообщение',
+            'is_temporary': 'Временное сообщение',
+            'datetime_of_deletion': 'Дата и время уничтожения сообщения'
         }
         widgets = {
             'url_hash': forms.Textarea(attrs={'class': 'form-control', 'rows': 7}),
