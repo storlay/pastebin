@@ -5,7 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="mt-5 fs-3">Генерация сообщения</h1>
+    <script>
+        function toggleFieldActivation() {
+
+            let checkBox = document.getElementById("is_temporary");
+
+            let field = document.getElementById("datetime_of_deletion");
+
+            if (checkBox.checked) {
+
+                field.disabled = false;
+
+            } else {
+
+                field.disabled = true;
+
+            }
+
+        }
+    </script>
+    <h1 class="mt-5 fs-3">Генерация текста</h1>
     <div class="col-6">
         <form method="post" class="needs-validation">
             {% csrf_token %}
