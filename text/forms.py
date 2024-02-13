@@ -1,23 +1,21 @@
-from datetime import datetime
-
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 from text.models import Text
 
 
 class InputTextForm(forms.ModelForm):
-
     def clean_datetime_of_deletion(self):
         data = self.cleaned_data['datetime_of_deletion']
-        if datetime.now() > data:
+        if timezone.now() > data:
             raise ValidationError('Дата и время уничтожения сообщения не могут быть меньше текущих')
         return data
 
     class Meta:
         model = Text
         fields = '__all__'
-        required = ('url_hash',)
+        required = '__all__'
         labels = {
             'url_hash': 'Текст',
             'is_temporary': 'Временное сообщение',

@@ -6,9 +6,11 @@
 
 {% block content %}
     <h1 class="mt-5 fs-3">Генерация сообщения</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-    </form>
+    <div class="col-6">
+        <form method="post" class="needs-validation">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
 {% endblock %}
