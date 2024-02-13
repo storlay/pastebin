@@ -8,14 +8,14 @@ from text.models import Text
 class InputTextForm(forms.ModelForm):
     def clean_datetime_of_deletion(self):
         data = self.cleaned_data['datetime_of_deletion']
-        if timezone.now() > data:
+        if data is not None and timezone.now() > data:
             raise ValidationError('Дата и время уничтожения сообщения не могут быть меньше текущих')
         return data
 
     class Meta:
         model = Text
         fields = '__all__'
-        required = '__all__'
+        required = ('url_hash',)
         labels = {
             'url_hash': 'Сообщение',
             'is_temporary': 'Временное сообщение',
