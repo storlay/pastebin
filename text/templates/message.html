@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block browser-title %}
+    Сообщение №{{ message.pk }}
+{% endblock %}
+
+{% block page-title %}
+    Сообщение №{{ message.pk }}
+{% endblock %}
+
+{% block content %}
+    <div class="card col-9">
+        <div class="card-body">{{ message.url_hash }}</div>
+    </div>
+{% endblock %}

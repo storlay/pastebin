@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}
+{% block browser-title %}
     Pastebin
+{% endblock %}
+
+{% block page-title %}
+    Генерация сообщения
 {% endblock %}
 
 {% block content %}
@@ -24,7 +28,6 @@
 
         }
     </script>
-    <h1 class="mt-5 fs-3">Генерация сообщения</h1>
     <div class="col-6">
         <form method="post" class="needs-validation">
             {% csrf_token %}
