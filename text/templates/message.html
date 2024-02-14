@@ -12,4 +12,17 @@
     <div class="card col-9">
         <div class="card-body">{{ message.url_hash }}</div>
     </div>
+    <br>
+    <button class="btn btn-primary" onclick="copyToClipboard()">Скопировать ссылку на сообщение</button>
+    <script>
+        function copyToClipboard(text) {
+            var inputc = document.body.appendChild(document.createElement("input"));
+            inputc.value = window.location.href;
+            inputc.focus();
+            inputc.select();
+            document.execCommand('copy');
+            inputc.parentNode.removeChild(inputc);
+            alert("URL успешно скопирован.");
+        }
+    </script>
 {% endblock %}
