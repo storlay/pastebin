@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.utils import timezone
+from datetime import datetime
 
 from text.models import Text
 
@@ -8,7 +8,7 @@ from text.models import Text
 class InputTextForm(forms.ModelForm):
     def clean_datetime_of_deletion(self):
         data = self.cleaned_data['datetime_of_deletion']
-        if data is not None and timezone.now() > data:
+        if data is not None and datetime.now() >= data:
             raise ValidationError('Дата и время уничтожения сообщения не могут быть меньше текущих')
         return data
 
@@ -19,7 +19,7 @@ class InputTextForm(forms.ModelForm):
         labels = {
             'url_hash': 'Сообщение',
             'is_temporary': 'Временное сообщение',
-            'datetime_of_deletion': 'Дата и время уничтожения сообщения'
+            'datetime_of_deletion': 'Дата и время уничтожения сообщения*'
         }
         widgets = {
             'url_hash': forms.Textarea(attrs={'class': 'form-control', 'rows': 7}),

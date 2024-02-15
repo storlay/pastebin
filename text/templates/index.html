@@ -32,6 +32,7 @@
         <form method="post" class="needs-validation">
             {% csrf_token %}
             {{ form.as_p }}
+            <p>*часовой пояс <a href="https://24timezones.com/chasovoy-poyas/utc" target="_blank">UTC±0</a></p>
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
     </div>
