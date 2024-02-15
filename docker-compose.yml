@@ -11,10 +11,11 @@ services:
     command: bash entrypoint.sh
 
   db:
-    image: postgres:13
+    image: postgres:16.0
     container_name: postgres
     env_file:
       - .env
+    command: bash pg_cron.sh
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
