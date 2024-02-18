@@ -1,16 +1,32 @@
+import uuid
+
 from django import forms
 from django.core.exceptions import ValidationError
-from datetime import datetime
 
+from django.utils import timezone
+
+from pcloud_api.message import upload_message
 from text.models import Text
 
 
 class InputTextForm(forms.ModelForm):
     def clean_datetime_of_deletion(self):
         data = self.cleaned_data['datetime_of_deletion']
-        if data is not None and datetime.now() >= data:
+        if data is not None and timezone.now() >= data:
             raise ValidationError('Дата и время уничтожения сообщения не могут быть меньше текущих')
         return data
+
+    def save(self, *args, **kwargs):
+        result = super(InputTextForm, self).save(commit=False)
+        message = self.cleaned_data['url_hash']
+        message_hash = uuid.uuid4()
+        with open(f'{message_hash}.txt', 'w') as file:
+            file.write(message)
+        upload_message(f'{message_hash}.txt')
+        result.url_hash = message_hash
+
+        result.save(*args, **kwargs)
+        return result
 
     class Meta:
         model = Text
