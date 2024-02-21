@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView
 
+from drive.message import download_message
 from text.forms import InputTextForm
 from text.models import Text
 
@@ -16,3 +17,9 @@ class ShowMessageView(DetailView):
     model = Text
     template_name = 'message.html'
     context_object_name = 'message'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        message_object = get_object_or_404(Text, pk=self.kwargs['pk'])
+        context['content'] = download_message(message_object.url_hash)
+        return context

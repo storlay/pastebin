@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 from django.utils import timezone
 
-from pcloud_api.message import upload_message
+from drive.message import upload_message
 from text.models import Text
 
 
@@ -19,11 +19,11 @@ class InputTextForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         result = super(InputTextForm, self).save(commit=False)
         message = self.cleaned_data['url_hash']
-        message_hash = uuid.uuid4()
-        with open(f'{message_hash}.txt', 'w') as file:
+        message_name = f'{uuid.uuid4()}.txt'
+        with open(message_name, 'w') as file:
             file.write(message)
-        upload_message(f'{message_hash}.txt')
-        result.url_hash = message_hash
+        message_id = upload_message(message_name)
+        result.url_hash = message_id
 
         result.save(*args, **kwargs)
         return result
