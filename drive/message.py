@@ -13,7 +13,7 @@ CREDS = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FI
 SERVICE = build('drive', 'v3', credentials=CREDS)
 
 
-def upload_message(file):
+def upload_message(file: str):
     file_metadata = {
         'name': file,
         'parents': [PARENT_FOLDER_ID]
@@ -23,7 +23,7 @@ def upload_message(file):
     return file_object.get('id')
 
 
-def download_message(message_id):
+def download_message(message_id: str):
     request = SERVICE.files().get_media(fileId=message_id)
     file = io.BytesIO()
     downloader = MediaIoBaseDownload(file, request)
@@ -31,3 +31,7 @@ def download_message(message_id):
     while done is False:
         status, done = downloader.next_chunk()
     return file.getvalue().decode('utf-8')
+
+
+def delete_message(message_id: str):
+    SERVICE.files().delete(fileId=message_id).execute()
