@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block browser-title %}
+    Лента сообщений
+{% endblock %}
+
+{% block page-title %}
+    Лента сообщений
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for message in messages %}
+            <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Сообщение №{{ message.pk }}</h5>
+                        <p class="card-text">От пользователя example</p>
+                        <a href="{{ message.get_absolute_url }}" class="btn btn-primary">Перейти к сообщению</a>
+                    </div>
+                </div>
+                <br>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

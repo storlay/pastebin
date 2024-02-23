@@ -8,4 +8,4 @@ class Text(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse("input_text", kwargs={"pk": self.pk})
+        return reverse("show_message", kwargs={"pk": self.pk})
