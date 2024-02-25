@@ -8,9 +8,16 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
-AUTH_USER_MODEL = 'users.User'
-
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(' ')
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = 'input_text'
+LOGOUT_REDIRECT_URL = 'input_text'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'users.authentication.EmailAuthenticationBackend'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -80,7 +87,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-Ru'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True

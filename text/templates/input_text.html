@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block browser-title %}
+    Pastebin
+{% endblock %}
+
+{% block page-title %}
+    Генерация сообщения
+{% endblock %}
+
+{% block content %}
+    <script>
+        function toggleFieldActivation() {
+
+            let checkBox = document.getElementById("is_temporary");
+
+            let field = document.getElementById("datetime_of_deletion");
+
+            if (checkBox.checked) {
+
+                field.disabled = false;
+
+            } else {
+
+                field.disabled = true;
+
+            }
+
+        }
+    </script>
+    <div class="col-6">
+        <form method="post" class="needs-validation">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>Ошибка!</strong> Пожалуйста, исправьте следующие ошибки:
+                    {{ form.errors }}
+                </div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="{{ form.url_hash.id_for_label }}" class="form-label">{{ form.url_hash.label }}:</label>
+                {{ form.url_hash }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.is_temporary.id_for_label }}" class="form-label">{{ form.is_temporary.label }}</label>
+                {{ form.is_temporary }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.datetime_of_deletion.id_for_label }}" class="form-label">{{ form.datetime_of_deletion.label }}</label>
+                {{ form.datetime_of_deletion }}
+            </div>
+            <p>*часовой пояс <a href="https://24timezones.com/chasovoy-poyas/utc" target="_blank">UTC±0</a></p>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+{% endblock %}

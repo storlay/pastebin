@@ -30,7 +30,7 @@ class InputTextForm(forms.ModelForm):
 
     class Meta:
         model = Text
-        fields = '__all__'
+        fields = ('url_hash', 'is_temporary', 'datetime_of_deletion')
         required = ('url_hash',)
         labels = {
             'url_hash': 'Сообщение',

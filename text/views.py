@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
 
 from drive.message import download_message
@@ -9,8 +10,8 @@ from text.models import Text
 class InputTextView(CreateView):
     model = Text
     form_class = InputTextForm
-    template_name = 'index.html'
-    success_url = '/'
+    template_name = 'input_text.html'
+    success_url = reverse_lazy('input_text')
 
 
 class ShowMessageView(DetailView):
