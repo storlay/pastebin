@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block browser-title %}
+    Мои сообщения
+{% endblock %}
+
+{% block page-title %}
+    Мои сообщения
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for message in messages %}
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Сообщение №{{ message.pk }}</h5>
+                        <br>
+                        <p class="card-text">Дата
+                            создания: {{ message.datetime_of_creation|date }} {{ message.datetime_of_creation|time:"H:i" }}
+                            (<a href="https://24timezones.com/chasovoy-poyas/utc" target="_blank">UTC±0</a>)</p>
+                        <p class="card-text">
+                            {% if message.datetime_of_deletion is not None %}
+                                Дата удаления: {{ message.datetime_of_deletion|date }}
+                                {{ message.datetime_of_deletion|time:"H:i" }}
+                                (<a href="https://24timezones.com/chasovoy-poyas/utc" target="_blank">UTC±0</a>)
+                            {% else %}
+                                Вечное сообщение
+                            {% endif %}
+                        </p>
+                        <a href="{{ message.get_absolute_url }}" class="btn btn-primary">Перейти к сообщению</a>
+                    </div>
+                </div>
+                <br>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

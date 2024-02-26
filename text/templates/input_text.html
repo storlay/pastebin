@@ -41,10 +41,11 @@
                 <label for="{{ form.url_hash.id_for_label }}" class="form-label">{{ form.url_hash.label }}:</label>
                 {{ form.url_hash }}
             </div>
-            <div class="mb-3">
-                <label for="{{ form.is_temporary.id_for_label }}" class="form-label">{{ form.is_temporary.label }}</label>
+            <div class="form-check form-switch">
                 {{ form.is_temporary }}
+                <label class="form-check-label" for="{{ form.is_temporary.id_for_label }}">{{ form.is_temporary.label }}</label>
             </div>
+            <br>
             <div class="mb-3">
                 <label for="{{ form.datetime_of_deletion.id_for_label }}" class="form-label">{{ form.datetime_of_deletion.label }}</label>
                 {{ form.datetime_of_deletion }}

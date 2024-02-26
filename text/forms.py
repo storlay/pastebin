@@ -40,6 +40,7 @@ class InputTextForm(forms.ModelForm):
         widgets = {
             'url_hash': forms.Textarea(attrs={'class': 'form-control', 'rows': 7}),
             'is_temporary': forms.CheckboxInput(attrs={'class': 'form-check-input',
+                                                       'role': 'switch',
                                                        'id': 'is_temporary',
                                                        'onchange': "toggleFieldActivation()"}),
             'datetime_of_deletion': forms.DateTimeInput(attrs={'class': 'form-control',

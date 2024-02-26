@@ -9,6 +9,7 @@ class Text(models.Model):
     is_temporary = models.BooleanField(default=False)
     datetime_of_deletion = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author', blank=True, null=True)
+    datetime_of_creation = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         from django.urls import reverse

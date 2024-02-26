@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
@@ -35,3 +36,12 @@ class MessageFeedView(ListView):
     model = Text
     template_name = 'message_feed.html'
     context_object_name = 'messages'
+
+
+class UserMessageFeedView(LoginRequiredMixin, ListView):
+    model = Text
+    template_name = 'user_message_feed.html'
+    context_object_name = 'messages'
+
+    def get_queryset(self):
+        return Text.objects.filter(author_id=self.request.user.pk)
