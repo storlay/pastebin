@@ -29,7 +29,7 @@ class RegisterUserForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError('Пользователь с таким e-mail уже существует')
+            raise forms.ValidationError('Пользователь с таким email уже существует')
         return email
 
     def clean_username(self):

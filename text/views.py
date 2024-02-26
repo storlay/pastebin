@@ -13,6 +13,11 @@ class InputTextView(CreateView):
     template_name = 'input_text.html'
     success_url = reverse_lazy('input_text')
 
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
 class ShowMessageView(DetailView):
     model = Text

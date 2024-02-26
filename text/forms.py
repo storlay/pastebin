@@ -16,7 +16,7 @@ class InputTextForm(forms.ModelForm):
             raise ValidationError('Дата и время уничтожения сообщения не могут быть меньше текущих')
         return data
 
-    def save(self, *args, **kwargs):
+    def save(self, commit=True):
         result = super(InputTextForm, self).save(commit=False)
         message = self.cleaned_data['url_hash']
         message_name = f'{uuid.uuid4()}.txt'
@@ -25,7 +25,7 @@ class InputTextForm(forms.ModelForm):
         message_id = upload_message(message_name)
         result.url_hash = message_id
 
-        result.save(*args, **kwargs)
+        result.save()
         return result
 
     class Meta:
