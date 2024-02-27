@@ -9,6 +9,6 @@ from .models import Text
 def delete_message_drive():
     current_date = timezone.now()
     irrelevant_messages = Text.objects.filter(datetime_of_deletion__lte=current_date)
-    for message_id in irrelevant_messages.values_list('url_hash', flat=True):
+    for message_id in irrelevant_messages.values_list('drive_id', flat=True):
         delete_message(message_id)
     irrelevant_messages.delete()

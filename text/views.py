@@ -27,9 +27,12 @@ class ShowMessageView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        message_object = get_object_or_404(Text, pk=self.kwargs['pk'])
-        context['content'] = download_message(message_object.url_hash)
+        message_object = get_object_or_404(Text, uuid_url=self.kwargs['uuid_url'])
+        context['content'] = download_message(message_object.drive_id)
         return context
+
+    def get_object(self, queryset=None):
+        return Text.objects.get(uuid_url=self.kwargs['uuid_url'])
 
 
 class MessageFeedView(ListView):

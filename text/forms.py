@@ -2,7 +2,6 @@ import uuid
 
 from django import forms
 from django.core.exceptions import ValidationError
-
 from django.utils import timezone
 
 from drive.message import upload_message
@@ -18,27 +17,27 @@ class InputTextForm(forms.ModelForm):
 
     def save(self, commit=True):
         result = super(InputTextForm, self).save(commit=False)
-        message = self.cleaned_data['url_hash']
+        message = self.cleaned_data['drive_id']
         message_name = f'{uuid.uuid4()}.txt'
         with open(message_name, 'w') as file:
             file.write(message)
         message_id = upload_message(message_name)
-        result.url_hash = message_id
+        result.drive_id = message_id
 
         result.save()
         return result
 
     class Meta:
         model = Text
-        fields = ('url_hash', 'is_temporary', 'datetime_of_deletion')
-        required = ('url_hash',)
+        fields = ('drive_id', 'is_temporary', 'datetime_of_deletion')
+        required = ('drive_id',)
         labels = {
-            'url_hash': 'Сообщение',
+            'drive_id': 'Сообщение',
             'is_temporary': 'Временное сообщение',
             'datetime_of_deletion': 'Дата и время уничтожения сообщения*'
         }
         widgets = {
-            'url_hash': forms.Textarea(attrs={'class': 'form-control', 'rows': 7}),
+            'drive_id': forms.Textarea(attrs={'class': 'form-control', 'rows': 7}),
             'is_temporary': forms.CheckboxInput(attrs={'class': 'form-check-input',
                                                        'role': 'switch',
                                                        'id': 'is_temporary',
