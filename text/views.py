@@ -1,23 +1,24 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views import View
+from django.views.generic import DetailView, ListView
 
 from drive.message import download_message
 from text.forms import InputTextForm
+from text.hash_generation import hash_decode
 from text.models import Text
+from text.service import create_message
 
 
-class InputTextView(CreateView):
-    model = Text
-    form_class = InputTextForm
-    template_name = 'input_text.html'
-    success_url = reverse_lazy('input_text')
+class InputTextView(View):
+    def get(self, request):
+        return render(request, 'input_text.html', {'form': InputTextForm})
 
-    def form_valid(self, form):
-        if self.request.user.is_authenticated:
-            form.instance.author = self.request.user
-        return super().form_valid(form)
+    def post(self, request):
+        form = InputTextForm(request.POST)
+        if form.is_valid():
+            create_message(form)
+            return redirect('input_text')
 
 
 class ShowMessageView(DetailView):
@@ -28,7 +29,8 @@ class ShowMessageView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         message_object = get_object_or_404(Text, uuid_url=self.kwargs['uuid_url'])
-        context['content'] = download_message(message_object.drive_id)
+        drive_id = hash_decode(message_object.drive_id)
+        context['content'] = download_message(drive_id)
         return context
 
     def get_object(self, queryset=None):
