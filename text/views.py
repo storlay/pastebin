@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
@@ -17,8 +19,9 @@ class InputTextView(View):
     def post(self, request):
         form = InputTextForm(request.POST)
         if form.is_valid():
-            create_message(form)
-            return redirect('input_text')
+            uuid_url = uuid.uuid4()
+            create_message(form, uuid_url)
+            return redirect('show_message', uuid_url)
 
 
 class ShowMessageView(DetailView):
