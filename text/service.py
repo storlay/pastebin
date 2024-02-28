@@ -3,7 +3,7 @@ from text.hash_generation import hash_encode
 from text.models import Text
 
 
-def create_message(form, uuid_url):
+def create_message(form, uuid_url, author):
     message = form.cleaned_data['message']
     message_name = f'{uuid_url}.txt'
     with open(message_name, 'w') as file:
@@ -15,5 +15,6 @@ def create_message(form, uuid_url):
         uuid_url=uuid_url,
         drive_id=encoded_message_id,
         is_temporary=form.cleaned_data['is_temporary'],
-        datetime_of_deletion=form.cleaned_data['datetime_of_deletion']
+        datetime_of_deletion=form.cleaned_data['datetime_of_deletion'],
+        author=author
     )

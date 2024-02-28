@@ -22,7 +22,8 @@ class InputTextView(View):
         form = InputTextForm(request.POST)
         if form.is_valid():
             uuid_url = uuid.uuid4()
-            create_message(form, uuid_url)
+            author = self.request.user if self.request.user.is_authenticated else None
+            create_message(form, uuid_url, author)
             return redirect('show_message', uuid_url)
 
 
@@ -48,12 +49,14 @@ class MessageFeedView(ListView):
     model = Text
     template_name = 'message_feed.html'
     context_object_name = 'messages'
+    paginate_by = 9
 
 
 class UserMessageFeedView(LoginRequiredMixin, ListView):
     model = Text
     template_name = 'user_message_feed.html'
     context_object_name = 'messages'
+    paginate_by = 6
 
     def get_queryset(self):
         return Text.objects.filter(author_id=self.request.user.pk)

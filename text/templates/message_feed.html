@@ -15,16 +15,42 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Сообщение №{{ message.pk }}</h5>
-                        {% if message.author is not None %}
-                        <p class="card-text">От пользователя {{ message.author.username }}</p>
+                        {% if message.author %}
+                            <p class="card-text">От пользователя {{ message.author.username }}</p>
                         {% else %}
-                        <p class="card-text">От анонимного пользователя</p>
+                            <p class="card-text">От анонимного пользователя</p>
                         {% endif %}
-                        <a href="{% url 'show_message' message.uuid_url %}" class="btn btn-primary">Перейти к сообщению</a>
+                        <a href="{% url 'show_message' message.uuid_url %}" class="btn btn-primary">Перейти к
+                            сообщению</a>
                     </div>
                 </div>
                 <br>
             </div>
         {% endfor %}
     </div>
+    <br>
+    <nav aria-label="Пагинация">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                       aria-label="Предыдущая страница">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% for position in paginator.page_range %}
+                {% if position >= page_obj.number|add:-2 and position <= page_obj.number|add:2 %}
+                    <li class="page-item"><a class="page-link" href="?page={{ position }}">{{ position }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Следующая страница">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 {% endblock %}

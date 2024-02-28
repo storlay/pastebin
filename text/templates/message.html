@@ -6,7 +6,7 @@
 
 {% block page-title %}
     Сообщение №{{ message.pk }}
-    {% if message.author is not None %}
+    {% if message.author %}
         <small class="text-body-secondary">от пользователя {{ message.author.username }}</small>
     {% else %}
         <small class="text-body-secondary">от анонимного пользователя</small>
