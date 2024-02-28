@@ -1,5 +1,3 @@
-import uuid
-
 from drive.message import upload_message
 from text.hash_generation import hash_encode
 from text.models import Text
@@ -7,7 +5,7 @@ from text.models import Text
 
 def create_message(form, uuid_url):
     message = form.cleaned_data['message']
-    message_name = f'{uuid.uuid4()}.txt'
+    message_name = f'{uuid_url}.txt'
     with open(message_name, 'w') as file:
         file.write(message)
     message_id = upload_message(message_name)
