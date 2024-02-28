@@ -17,7 +17,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-dark navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" style="color: #f0f8ff" href="/">Создать сообщение</a>
@@ -31,6 +31,7 @@
             </ul>
             {% if user.is_authenticated %}
                 <a href="{% url 'users:profile' %}" class="navbar-text" style="color: #f0f8ff">{{ user.username }}</a>
+                &emsp;
                 <form class="d-flex" method="post" action="{% url 'users:logout' %}">
                     {% csrf_token %}
                     <button class="btn btn-outline-light" type="submit">Выйти</button>

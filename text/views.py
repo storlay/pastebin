@@ -2,7 +2,9 @@ import uuid
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
 
 from drive.message import download_message
@@ -24,6 +26,7 @@ class InputTextView(View):
             return redirect('show_message', uuid_url)
 
 
+@method_decorator(cache_page(60), name='dispatch')
 class ShowMessageView(DetailView):
     model = Text
     template_name = 'message.html'
@@ -40,6 +43,7 @@ class ShowMessageView(DetailView):
         return Text.objects.get(uuid_url=self.kwargs['uuid_url'])
 
 
+@method_decorator(cache_page(60), name='dispatch')
 class MessageFeedView(ListView):
     model = Text
     template_name = 'message_feed.html'
