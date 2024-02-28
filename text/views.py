@@ -44,7 +44,7 @@ class ShowMessageView(DetailView):
         return Text.objects.get(uuid_url=self.kwargs['uuid_url'])
 
 
-@method_decorator(cache_page(60), name='dispatch')
+@method_decorator(cache_page(15), name='dispatch')
 class MessageFeedView(ListView):
     model = Text
     template_name = 'message_feed.html'
@@ -52,6 +52,7 @@ class MessageFeedView(ListView):
     paginate_by = 9
 
 
+@method_decorator(cache_page(15), name="dispatch")
 class UserMessageFeedView(LoginRequiredMixin, ListView):
     model = Text
     template_name = 'user_message_feed.html'
