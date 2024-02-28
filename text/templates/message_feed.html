@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'feed.html' %}
 
 {% block browser-title %}
     Лента сообщений
@@ -8,7 +8,7 @@
     Лента сообщений
 {% endblock %}
 
-{% block content %}
+{% block messages %}
     <div class="row">
         {% for message in messages %}
             <div class="col-sm-4 mb-3 mb-sm-0">
@@ -28,29 +28,4 @@
             </div>
         {% endfor %}
     </div>
-    <br>
-    <nav aria-label="Пагинация">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
-                       aria-label="Предыдущая страница">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-            {% for position in paginator.page_range %}
-                {% if position >= page_obj.number|add:-2 and position <= page_obj.number|add:2 %}
-                    <li class="page-item"><a class="page-link" href="?page={{ position }}">{{ position }}</a></li>
-                {% endif %}
-            {% endfor %}
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Следующая страница">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
 {% endblock %}
