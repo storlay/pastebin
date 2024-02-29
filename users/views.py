@@ -27,6 +27,25 @@ class UpdateUserView(UpdateView):
         return self.request.user
 
 
+class UserPasswordResetView(PasswordResetView):
+    template_name = 'password_reset_form.html'
+    email_template_name = 'password_reset_email.html'
+    success_url = reverse_lazy('users:password_reset_done')
+
+
+class UserPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'password_reset_done.html'
+
+
+class UserPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'password_reset_confirm.html'
+    success_url = reverse_lazy('users:password_reset_complete')
+
+
+class UserPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'password_reset_complete.html'
+
+
 class UserPasswordChangeView(PasswordChangeView):
     form_class = UserPasswordChangeForm
     success_url = reverse_lazy('users:password_change_done')
