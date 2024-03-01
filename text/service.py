@@ -16,5 +16,6 @@ def create_message(form, uuid_url, author):
         drive_id=encoded_message_id,
         is_temporary=form.cleaned_data['is_temporary'],
         datetime_of_deletion=form.cleaned_data['datetime_of_deletion'],
+        is_private=form.cleaned_data['is_private'],
         author=author
     )

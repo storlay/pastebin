@@ -50,6 +50,7 @@ class MessageFeedView(ListView):
     template_name = 'message_feed.html'
     context_object_name = 'messages'
     paginate_by = 9
+    queryset = Text.objects.filter(is_private=False)
 
 
 @method_decorator(cache_page(15), name="dispatch")

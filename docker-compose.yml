@@ -40,11 +40,11 @@ services:
       - ./:/app
     env_file:
       - ./.env
+    command: 'celery -A pastebin worker -l info'
     depends_on:
       - redis
       - webapp
       - db
-    command: 'celery -A pastebin worker -l info'
 
   beat:
     build: .
@@ -54,12 +54,12 @@ services:
       - ./:/app
     env_file:
       - ./.env
+    command: 'celery -A pastebin beat -l info'
     depends_on:
       - redis
       - webapp
       - worker
       - db
-    command: 'celery -A pastebin beat -l info'
 
   flower:
     build: .
@@ -69,11 +69,12 @@ services:
     command: 'celery -A pastebin flower'
     volumes:
       - ./:/app
-    depends_on:
-      - worker
-      - redis
     ports:
       - "5555:5555"
+    depends_on:
+      - webapp
+      - worker
+      - redis
 
 
 volumes:
