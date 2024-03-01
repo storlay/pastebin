@@ -20,7 +20,7 @@ INTERNAL_IPS = [
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(' ')
 
 AUTH_USER_MODEL = 'users.User'
-LOGIN_URL = 'users:login'
+LOGIN_URL = 'users:login.svg'
 LOGIN_REDIRECT_URL = 'input_text'
 LOGOUT_REDIRECT_URL = 'input_text'
 
@@ -106,7 +106,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# Static files
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

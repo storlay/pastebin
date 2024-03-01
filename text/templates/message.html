@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block browser-title %}
     Сообщение №{{ message.pk }}
@@ -15,7 +16,8 @@
 
 {% block content %}
     <p>
-        Дата создания: {{ message.datetime_of_creation|date }} {{ message.datetime_of_creation|time:"H:i" }}
+        <img src="{% static 'message/calendar.svg' %}">  Дата
+        создания: {{ message.datetime_of_creation|date }} {{ message.datetime_of_creation|time:"H:i" }}
         (<a href="https://24timezones.com/chasovoy-poyas/utc" target="_blank">UTC±0</a>)
     </p>
     <br>
@@ -23,7 +25,9 @@
         <div class="card-body">{{ content }}</div>
     </div>
     <br>
-    <button class="btn btn-primary" onclick="copyToClipboard()">Скопировать ссылку на сообщение</button>
+    <button class="btn btn-primary" onclick="copyToClipboard()"><img src="{% static 'message/copy.svg' %}">  Скопировать
+        ссылку на сообщение
+    </button>
     <script>
         function copyToClipboard(text) {
             var inputc = document.body.appendChild(document.createElement("input"));

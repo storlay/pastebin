@@ -14,7 +14,7 @@ class LoginUserView(LoginView):
 class RegisterUserView(CreateView):
     form_class = RegisterUserForm
     template_name = 'register.html'
-    success_url = reverse_lazy('users:login')
+    success_url = reverse_lazy('users:login.svg')
 
 
 class UpdateUserView(UpdateView):

@@ -9,7 +9,7 @@
     <title>{% block browser-title %}{% endblock %}</title>
 </head>
 <body style="min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between">
-<nav class="navbar navbar-expand-lg" style="background-color: #1b1b1b;">
+<nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #1b1b1b;">
     <div class="container">
         <div class="fs-2 me-2 nav-link"><a class="nav-link navbar-brand fs-4" style="color: #f0f8ff" href="/">✉️
             Pastebin</a></div>
@@ -17,7 +17,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-dark navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" style="color: #f0f8ff" href="/">Создать сообщение</a>
@@ -30,16 +30,21 @@
                 </li>
             </ul>
             {% if user.is_authenticated %}
+                <img src="{% static 'navbar/user.svg' %}" alt="User">
+                &nbsp;
                 <a href="{% url 'users:profile' %}" class="navbar-text" style="color: #f0f8ff">{{ user.username }}</a>
                 &emsp;
                 <form class="d-flex" method="post" action="{% url 'users:logout' %}">
                     {% csrf_token %}
-                    <button class="btn btn-outline-light" type="submit">Выйти</button>
+                    <button class="btn btn-sm btn-outline-light" type="submit"><img src="{% static 'navbar/logout.svg' %}"> Выйти
+                    </button>
                 </form>
             {% else %}
                 <div class="d-grid gap-2 d-md-block">
-                    <a class="btn btn-sm btn-outline-light" href="{% url 'users:login' %}">Войти</a>
-                    <a class="btn btn-sm btn-primary" href="{% url 'users:register' %}">Регистрация</a>
+                    <a class="btn btn-sm btn-outline-light" href="{% url 'users:login.svg' %}">
+                        <img src="{% static 'navbar/login.svg' %}"> Войти</a>
+                    <a class="btn btn-sm btn-primary" href="{% url 'users:register' %}">
+                        <img src="{% static 'navbar/register.svg' %}"> Регистрация</a>
                 </div>
             {% endif %}
         </div>
