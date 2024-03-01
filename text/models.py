@@ -11,3 +11,6 @@ class Text(models.Model):
     datetime_of_deletion = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author', blank=True, null=True)
     datetime_of_creation = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-pk',)
