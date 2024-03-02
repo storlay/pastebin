@@ -20,7 +20,7 @@ INTERNAL_IPS = [
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(' ')
 
 AUTH_USER_MODEL = 'users.User'
-LOGIN_URL = 'users:login.svg'
+LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'input_text'
 LOGOUT_REDIRECT_URL = 'input_text'
 
