@@ -25,13 +25,13 @@
         <div class="card-body">{{ content }}</div>
     </div>
     <br>
-    <button class="btn btn-primary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-            data-bs-content="Url успешно скопирован" onclick="copyToClipboard()"><img
-            src="{% static 'message/copy.svg' %}"> Скопировать ссылку на сообщение
+    <button class="btn btn-primary" onclick="copyToClipboard()">
+        <img src="{% static 'message/copy.svg' %}"> Скопировать ссылку на сообщение
     </button>
     {% if user.is_authenticated and message.author_id == user.pk %}
-        <a href="{% url 'delete_message' message.uuid_url %}" class="btn btn-danger"><img
-                src="{% static 'message/delete.svg' %}"> Удалить сообщение</a>
+        <a href="{% url 'delete_message' message.uuid_url %}" class="btn btn-danger">
+            <img src="{% static 'message/delete.svg' %}"> Удалить сообщение
+        </a>
     {% endif %}
     <script>
         function copyToClipboard(text) {
@@ -41,7 +41,7 @@
             inputc.select();
             document.execCommand('copy');
             inputc.parentNode.removeChild(inputc);
-            {#alert("URL успешно скопирован.");#}
+            alert("URL успешно скопирован.");
         }
     </script>
 {% endblock %}
