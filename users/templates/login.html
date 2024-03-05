@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block browser-title %}
     Регистрация
@@ -33,6 +32,8 @@
         <a href="{% url 'users:password_reset' %}">Забыли пароль?</a>
         <hr>
         <p class="fs-5 mt-3 fs-6">или войдите с помощью:</p>
-        <a href="{% url 'social:begin' 'github' %}" class="btn btn-secondary"><img src="{% static 'social_auth/github.svg' %}"> Github</a>
+        <a href="{% url 'social:begin' 'github' %}" class="btn btn-secondary">
+            <i class="bi bi-github"></i> Github
+        </a>
     </div>
 {% endblock %}

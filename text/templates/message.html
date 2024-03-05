@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block browser-title %}
     Сообщение №{{ message.pk }}
@@ -16,8 +15,8 @@
 
 {% block content %}
     <p>
-        <img src="{% static 'message/calendar.svg' %}"> Дата
-        создания: {{ message.datetime_of_creation|date }} {{ message.datetime_of_creation|time:"H:i" }}
+        <i class="bi bi-calendar-week-fill"></i> Дата создания:
+        {{ message.datetime_of_creation|date }} {{ message.datetime_of_creation|time:"H:i" }}
         (<a href="https://24timezones.com/chasovoy-poyas/utc" target="_blank">UTC±0</a>)
     </p>
     <br>
@@ -26,11 +25,11 @@
     </div>
     <br>
     <button class="btn btn-primary" onclick="copyToClipboard()">
-        <img src="{% static 'message/copy.svg' %}"> Скопировать ссылку на сообщение
+        <i class="bi bi-copy"></i> Скопировать ссылку на сообщение
     </button>
     {% if user.is_authenticated and message.author_id == user.pk %}
         <a href="{% url 'delete_message' message.uuid_url %}" class="btn btn-danger">
-            <img src="{% static 'message/delete.svg' %}"> Удалить сообщение
+            <i class="bi bi-trash"></i> Удалить сообщение
         </a>
     {% endif %}
     <script>
