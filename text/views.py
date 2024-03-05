@@ -2,12 +2,13 @@ import uuid
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.cache import cache_page
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, DeleteView, TemplateView
 
-from drive.message import download_message
+from drive.message import download_message, delete_message
 from text.forms import InputTextForm
 from text.hash_generation import hash_decode
 from text.models import Text
@@ -62,3 +63,23 @@ class UserMessageFeedView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Text.objects.filter(author_id=self.request.user.pk)
+
+
+class DeleteMessageView(LoginRequiredMixin, DeleteView):
+    model = Text
+    success_url = reverse_lazy('delete_message_done')
+    template_name = 'delete_message.html'
+    context_object_name = 'message'
+
+    def get_object(self, queryset=None):
+        return Text.objects.get(uuid_url=self.kwargs['uuid_url'])
+
+    def form_valid(self, form):
+        message = Text.objects.get(uuid_url=self.kwargs['uuid_url'])
+        decoded_hash = hash_decode(message.drive_id)
+        delete_message(decoded_hash)
+        return super().form_valid(form)
+
+
+class DeleteMessageDoneView(LoginRequiredMixin, TemplateView):
+    template_name = 'delete_message_done.html'

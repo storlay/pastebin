@@ -29,6 +29,10 @@
             data-bs-content="Url успешно скопирован" onclick="copyToClipboard()"><img
             src="{% static 'message/copy.svg' %}"> Скопировать ссылку на сообщение
     </button>
+    {% if user.is_authenticated and message.author_id == user.pk %}
+        <a href="{% url 'delete_message' message.uuid_url %}" class="btn btn-danger"><img
+                src="{% static 'message/delete.svg' %}"> Удалить сообщение</a>
+    {% endif %}
     <script>
         function copyToClipboard(text) {
             var inputc = document.body.appendChild(document.createElement("input"));

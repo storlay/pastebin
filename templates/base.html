@@ -20,13 +20,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" style="color: #f0f8ff" href="/">Создать сообщение</a>
+                    <a class="nav-link" style="color: #f0f8ff" href="{% url 'input_text' %}">Создать сообщение</a>
                 </li>
                 <li>
-                    <a class="nav-link" style="color: #f0f8ff" href="/message-feed/">Лента</a>
+                    <a class="nav-link" style="color: #f0f8ff" href="{% url 'message_feed' %}">Лента</a>
                 </li>
                 <li>
-                    <a class="nav-link" style="color: #f0f8ff" href="/my-messages/">Мои сообщения</a>
+                    <a class="nav-link" style="color: #f0f8ff" href="{% url 'user_message_feed' %}">Мои сообщения</a>
                 </li>
             </ul>
             {% if user.is_authenticated %}
@@ -36,7 +36,8 @@
                 &emsp;
                 <form class="d-flex" method="post" action="{% url 'users:logout' %}">
                     {% csrf_token %}
-                    <button class="btn btn-sm btn-outline-light" type="submit"><img src="{% static 'navbar/logout.svg' %}"> Выйти
+                    <button class="btn btn-sm btn-outline-light" type="submit"><img
+                            src="{% static 'navbar/logout.svg' %}"> Выйти
                     </button>
                 </form>
             {% else %}
