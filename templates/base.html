@@ -30,9 +30,11 @@
                 </li>
             </ul>
             {% if user.is_authenticated %}
-                <i class="bi bi-person-circle"></i>
+                <i class="bi bi-person-circle" style="color: #f0f8ff"></i>
                 &nbsp;
-                <a href="{% url 'users:profile' %}" class="navbar-text" style="color: #f0f8ff">{{ user.username }}</a>
+                <a href="{% url 'users:profile' %}" class="navbar-text" style="color: #f0f8ff">
+                    {{ user.username }}
+                </a>
                 &emsp;
                 <form class="d-flex" method="post" action="{% url 'users:logout' %}">
                     {% csrf_token %}
@@ -41,12 +43,10 @@
                     </button>
                 </form>
             {% else %}
-                <div class="d-grid gap-2 d-md-block">
-                    <a class="btn btn-sm btn-outline-light" href="{% url 'users:login' %}">
-                        <i class="bi bi-person-fill-up"></i> Войти</a>
-                    <a class="btn btn-sm btn-primary" href="{% url 'users:register' %}">
-                        <i class="bi bi-person-fill-add"></i> Регистрация</a>
-                </div>
+                <a class="btn btn-sm btn-outline-light me-md-2" href="{% url 'users:login' %}">
+                    <i class="bi bi-person-fill-up"></i> Войти</a>
+                <a class="btn btn-sm btn-primary" href="{% url 'users:register' %}">
+                    <i class="bi bi-person-fill-add"></i> Регистрация</a>
             {% endif %}
         </div>
     </div>

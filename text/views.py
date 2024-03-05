@@ -65,7 +65,7 @@ class UserMessageFeedView(LoginRequiredMixin, ListView):
         return Text.objects.filter(author_id=self.request.user.pk)
 
 
-class DeleteMessageView(LoginRequiredMixin, DeleteView):
+class DeleteMessageView(DeleteView):
     model = Text
     success_url = reverse_lazy('delete_message_done')
     template_name = 'delete_message.html'
@@ -81,5 +81,5 @@ class DeleteMessageView(LoginRequiredMixin, DeleteView):
         return super().form_valid(form)
 
 
-class DeleteMessageDoneView(LoginRequiredMixin, TemplateView):
+class DeleteMessageDoneView(TemplateView):
     template_name = 'delete_message_done.html'

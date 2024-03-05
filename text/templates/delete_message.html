@@ -13,7 +13,7 @@
     <p class="lead">Вы уверены, что хотите удалить сообщение?</p>
     <form method="post">
         {% csrf_token %}
-        <input type="submit" class="btn btn-lg btn-danger" value="Удалить">
+        <input type="submit" class="btn btn-lg btn-danger me-md-4" value="Удалить">
         <a href="{% url 'show_message' message.uuid_url %}" class="btn btn-lg btn-primary">Отменить</a>
     </form>
 {% endblock %}

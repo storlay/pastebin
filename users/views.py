@@ -1,9 +1,12 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, \
     PasswordResetConfirmView, PasswordResetCompleteView, PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView
 
-from users.forms import *
+from users.forms import LoginUserForm, RegisterUserForm, ProfileUserForm, UserPasswordChangeForm
+
+User = get_user_model()
 
 
 class LoginUserView(LoginView):
@@ -54,3 +57,17 @@ class UserPasswordChangeView(PasswordChangeView):
 
 class UserPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'password_change_done.html'
+
+
+class DeleteProfileView(DeleteView):
+    model = User
+    template_name = 'delete_profile.html'
+    context_object_name = 'profile'
+    success_url = reverse_lazy('users:delete_profile_done')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class DeleteProfileDoneView(TemplateView):
+    template_name = 'delete_profile_done.html'

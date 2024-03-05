@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block browser-title %}
+    Удалить профиль {{ profile.username }}
+{% endblock %}
+
+{% block page-title %}
+    Удалить профиль {{ profile.username }}
+{% endblock %}
+
+{% block content %}
+    <br>
+    <p class="lead">Вы уверены, что хотите удалить профиль?</p>
+    <div class="col-9 alert alert-danger">
+        Вместе с вашим профилем будут удалены все ваши сообщения.
+        Отменить это действие будет невозможно.
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-lg btn-danger me-md-4" value="Удалить">
+        <a href="{% url 'users:profile' %}" class="btn btn-lg btn-primary">Отменить</a>
+    </form>
+{% endblock %}
