@@ -21,4 +21,6 @@ class Text(models.Model):
             return f'Анонимное сообщение'
 
     class Meta:
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'
         ordering = ('-pk',)

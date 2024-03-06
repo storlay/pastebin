@@ -4,7 +4,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('text.urls')),
-    path('admin/', admin.site.urls),
+    path('ps-admin/', admin.site.urls),
     path('users/', include(('users.urls', 'users'), namespace='users')),
 
     path('social-auth/', include(('social_django.urls', 'social'), namespace='social'))
@@ -12,3 +12,7 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [path('__debug__/', include('debug_toolbar.urls'))]
+
+admin.site.site_header = 'Administration panel'
+admin.site.index_title = '✉️ Pastebin'
+
