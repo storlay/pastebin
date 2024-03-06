@@ -4,9 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views import View
 from django.views.decorators.cache import cache_page
-from django.views.generic import DetailView, ListView, DeleteView, TemplateView
+from django.views.generic import DetailView, ListView, DeleteView, TemplateView, FormView
 
 from drive.message import download_message, delete_message
 from text.forms import InputTextForm
@@ -15,17 +14,16 @@ from text.models import Text
 from text.service import create_message
 
 
-class InputTextView(View):
-    def get(self, request):
-        return render(request, 'input_text.html', {'form': InputTextForm})
+class InputTextView(FormView):
+    template_name = 'input_text.html'
+    form_class = InputTextForm
 
-    def post(self, request):
-        form = InputTextForm(request.POST)
-        if form.is_valid():
-            uuid_url = uuid.uuid4()
-            author = self.request.user if self.request.user.is_authenticated else None
-            create_message(form, uuid_url, author)
-            return redirect('show_message', uuid_url)
+    def form_valid(self, form):
+        uuid_url = uuid.uuid4()
+        author = self.request.user if self.request.user.is_authenticated else None
+        create_message(form, uuid_url, author)
+        self.success_url = reverse_lazy('show_message', kwargs={'uuid_url': uuid_url})
+        return super().form_valid(form)
 
 
 @method_decorator(cache_page(60), name='dispatch')
