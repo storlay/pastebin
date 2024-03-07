@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
+from django_recaptcha.fields import ReCaptchaField
 
 User = get_user_model()
 
@@ -10,6 +11,7 @@ class LoginUserForm(AuthenticationForm):
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label='Пароль',
                                widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    captcha = ReCaptchaField()
 
 
 class RegisterUserForm(UserCreationForm):
@@ -21,6 +23,7 @@ class RegisterUserForm(UserCreationForm):
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label='Повтор пароля',
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    captcha = ReCaptchaField()
 
     class Meta:
         model = User

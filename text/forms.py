@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from django_recaptcha.fields import ReCaptchaField
 
 
 class InputTextForm(forms.Form):
@@ -19,6 +20,7 @@ class InputTextForm(forms.Form):
                                                                                  'type': 'datetime-local',
                                                                                  'id': 'datetime_of_deletion',
                                                                                  'disabled': 'disabled'}))
+    captcha = ReCaptchaField()
 
     def clean_datetime_of_deletion(self):
         data = self.cleaned_data['datetime_of_deletion']
