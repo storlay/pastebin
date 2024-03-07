@@ -18,13 +18,13 @@
                         <br>
                         <p class="card-text">Дата
                             создания: {{ message.datetime_of_creation|date }} {{ message.datetime_of_creation|time:"H:i" }}
-                            (<a href="https://24timezones.com/chasovoy-poyas/utc" target="_blank">UTC±0</a>)
+                            (<a href="https://time.is/ru/Moscow" target="_blank">MSK</a>)
                         </p>
                         <p class="card-text">
                             {% if message.datetime_of_deletion %}
                                 Дата удаления: {{ message.datetime_of_deletion|date }}
                                 {{ message.datetime_of_deletion|time:"H:i" }}
-                                (<a href="https://24timezones.com/chasovoy-poyas/utc" target="_blank">UTC±0</a>)
+                                (<a href="https://time.is/ru/Moscow" target="_blank">MSK</a>)
                             {% else %}
                                 Вечное сообщение
                             {% endif %}
