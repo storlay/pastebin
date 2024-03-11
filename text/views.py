@@ -15,6 +15,7 @@ from text.service import create_message
 
 
 class InputTextView(FormView):
+    """Message generation"""
     template_name = 'input_text.html'
     form_class = InputTextForm
 
@@ -28,6 +29,7 @@ class InputTextView(FormView):
 
 @method_decorator(cache_page(60), name='dispatch')
 class ShowMessageView(DetailView):
+    """Displaying a message"""
     model = Text
     template_name = 'message.html'
     context_object_name = 'message'
@@ -45,6 +47,7 @@ class ShowMessageView(DetailView):
 
 @method_decorator(cache_page(15), name='dispatch')
 class MessageFeedView(ListView):
+    """Displaying the message feed"""
     model = Text
     template_name = 'message_feed.html'
     context_object_name = 'messages'
@@ -54,6 +57,7 @@ class MessageFeedView(ListView):
 
 @method_decorator(cache_page(15), name="dispatch")
 class UserMessageFeedView(LoginRequiredMixin, ListView):
+    """Displaying user messages"""
     model = Text
     template_name = 'user_message_feed.html'
     context_object_name = 'messages'
@@ -64,6 +68,7 @@ class UserMessageFeedView(LoginRequiredMixin, ListView):
 
 
 class DeleteMessageView(DeleteView):
+    """Deleting a message"""
     model = Text
     success_url = reverse_lazy('delete_message_done')
     template_name = 'delete_message.html'
@@ -80,4 +85,5 @@ class DeleteMessageView(DeleteView):
 
 
 class DeleteMessageDoneView(TemplateView):
+    """Successful deletion of the message"""
     template_name = 'delete_message_done.html'

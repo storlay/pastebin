@@ -4,6 +4,7 @@ from text.models import Text
 
 
 def create_message(form, uuid_url, author):
+    """Creating a message"""
     message = form.cleaned_data['message']
     message_name = f'{uuid_url}.txt'
     with open(message_name, 'w') as file:

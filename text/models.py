@@ -5,6 +5,7 @@ User = get_user_model()
 
 
 class Text(models.Model):
+    """Message"""
     uuid_url = models.UUIDField(unique=True, editable=False)
     drive_id = models.CharField(max_length=44, verbose_name="Хэш id файла")
     is_temporary = models.BooleanField(default=False, verbose_name='Сообщение временное')

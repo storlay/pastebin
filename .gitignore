@@ -121,7 +121,12 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-.idea
-idea
-.DS_Store
+# Drive account
 /drive/service_account.json
+
+#SSl
+certbot
+
+.idea
+
+.DS_Store

@@ -5,6 +5,8 @@ User = get_user_model()
 
 
 class EmailAuthenticationBackend(BaseBackend):
+    """Email authentication"""
+
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
             user_object = User.objects.get(email=username)
