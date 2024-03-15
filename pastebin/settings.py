@@ -24,6 +24,12 @@ LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'input_text'
 LOGOUT_REDIRECT_URL = 'input_text'
 
+# SSL
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 # Authentication
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.github.GithubOAuth2',
