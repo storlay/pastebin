@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block browser-title %}
+    Страница не найдена
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="text-center">
+            <h1 class="display-1 fw-bold">404</h1>
+            <p class="lead">
+                Кажется что-то пошло не так! Страница, которую вы запрашиваете, не существует.
+            </p>
+            <a href="{% url 'input_text' %}" class="btn btn-primary">Перейти на главную</a>
+        </div>
+    </div>
+{% endblock %}

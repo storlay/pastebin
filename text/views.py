@@ -1,7 +1,7 @@
 import uuid
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -87,3 +87,8 @@ class DeleteMessageView(DeleteView):
 class DeleteMessageDoneView(TemplateView):
     """Successful deletion of the message"""
     template_name = 'delete_message_done.html'
+
+
+def page_not_found_view(request, exception):
+    """Page not found"""
+    return render(request, 'error404.html', status=404)

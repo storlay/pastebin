@@ -18,3 +18,5 @@ if settings.DEBUG:
 
 admin.site.site_header = 'Administration panel'
 admin.site.index_title = '✉️ Pastebin'
+
+handler404 = 'text.views.page_not_found_view'
