@@ -35,11 +35,14 @@
         <a href="{% url 'users:password_reset' %}">Забыли пароль?</a>
         <hr>
         <p class="fs-5 mt-3 fs-6">или войдите с помощью:</p>
-        <a href="{% url 'social:begin' 'github' %}" class="btn btn-outline-secondary">
-            <i class="bi bi-github"></i> Github
-        </a>
         <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-outline-secondary">
             <i class="bi bi-google"></i> Google
+        </a>
+        <a href="{% url 'social:begin' 'twitter-oauth2' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-twitter-x"></i> Twitter / X
+        </a>
+        <a href="{% url 'social:begin' 'github' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-github"></i> Github
         </a>
     </div>
 {% endblock %}
