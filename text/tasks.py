@@ -1,3 +1,7 @@
+"""
+Task onfiguration for Celery
+"""
+
 from django.utils import timezone
 
 from drive.message import delete_message
@@ -8,6 +12,9 @@ from .models import Text
 
 @app.task(name='delete_message_drive')
 def delete_message_drive():
+    """
+    Deleting temporary messages that have expired
+    """
     current_date = timezone.now()
     irrelevant_messages = Text.objects.filter(
         datetime_of_deletion__lte=current_date

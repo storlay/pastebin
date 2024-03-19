@@ -1,3 +1,7 @@
+"""
+Downloading, uploading and deleting messages from Google Drive
+"""
+
 import io
 import os
 
@@ -17,7 +21,10 @@ SERVICE = build('drive', 'v3', credentials=CREDS)
 
 
 def upload_message(file: str):
-    """Uploading a message to Google Drive"""
+    """
+    Uploading a message to Google Drive
+    :param file: file name
+    """
     file_metadata = {
         'name': file,
         'parents': [PARENT_FOLDER_ID]
@@ -30,7 +37,10 @@ def upload_message(file: str):
 
 
 def download_message(message_id: str):
-    """Downloading a message from Google Drive"""
+    """
+    Downloading a message from Google Drive
+    :param message_id: message id
+    """
     request = SERVICE.files().get_media(fileId=message_id)
     file = io.BytesIO()
     downloader = MediaIoBaseDownload(file, request)
@@ -41,5 +51,8 @@ def download_message(message_id: str):
 
 
 def delete_message(message_id: str):
-    """Delete a message from Google Drive"""
+    """
+    Delete a message from Google Drive
+    :param message_id: message id
+    """
     SERVICE.files().delete(fileId=message_id).execute()

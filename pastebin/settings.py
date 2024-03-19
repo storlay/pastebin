@@ -1,3 +1,7 @@
+"""
+Django settings
+"""
+
 import os
 
 from pathlib import Path
@@ -60,7 +64,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SEC
 
 SOCIAL_AUTH_TWITTER_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_TWITTER_OAUTH2_KEY')
 SOCIAL_AUTH_TWITTER_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
-
 
 INSTALLED_APPS = [
     'admin_interface',

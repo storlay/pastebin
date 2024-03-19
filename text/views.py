@@ -1,3 +1,7 @@
+"""
+Views for the messages
+"""
+
 import uuid
 
 from django.contrib.auth.mixins import LoginRequiredMixin

@@ -1,3 +1,7 @@
+"""
+Messages URLs configuration
+"""
+
 from django.urls import path
 
 from text.views import InputTextView, ShowMessageView, MessageFeedView, UserMessageFeedView, DeleteMessageView, \

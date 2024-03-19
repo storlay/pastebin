@@ -1,3 +1,7 @@
+"""
+View for the users
+"""
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, \
     PasswordResetConfirmView, PasswordResetCompleteView, PasswordChangeView, PasswordChangeDoneView

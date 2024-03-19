@@ -1,3 +1,7 @@
+"""
+Registration and configuration of models for the admin panel
+"""
+
 from django.contrib import admin
 
 from text.models import Text

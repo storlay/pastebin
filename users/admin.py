@@ -1,3 +1,7 @@
+"""
+Registration and configuration of models for the admin panel
+"""
+
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin

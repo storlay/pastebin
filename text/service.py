@@ -1,10 +1,17 @@
+"""
+Functions for interacting with the models"""
+
 from drive.message import upload_message
 from text.hash_generation import hash_encode
 from text.models import Text
 
 
 def create_message(form, uuid_url, author):
-    """Creating a message"""
+    """
+    Creating a message
+    :param form: completed form
+    :param uuid_url: unique url for the message
+    :param author: author of the message"""
     message = form.cleaned_data['message']
     message_name = f'{uuid_url}.txt'
     with open(message_name, 'w') as file:
