@@ -19,7 +19,7 @@ class Text(models.Model):
         if self.author is not None:
             return f'Сообщение от {self.author.username}'
         else:
-            return f'Анонимное сообщение'
+            return 'Анонимное сообщение'
 
     class Meta:
         verbose_name = 'Сообщение'

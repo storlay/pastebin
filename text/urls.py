@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import *
+
+from text.views import InputTextView, ShowMessageView, MessageFeedView, UserMessageFeedView, DeleteMessageView, \
+    DeleteMessageDoneView
 
 urlpatterns = [
     path('', InputTextView.as_view(), name='input_text'),

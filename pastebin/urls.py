@@ -8,7 +8,8 @@ urlpatterns = [
     path('ps-admin/', admin.site.urls),
     path('users/', include(('users.urls', 'users'), namespace='users')),
 
-    path('social-auth/', include(('social_django.urls', 'social'), namespace='social'))
+    path('social-auth/', include(('social_django.urls', 'social'),
+                                 namespace='social'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

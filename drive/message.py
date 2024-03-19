@@ -9,7 +9,10 @@ SCOPES = ['https://www.googleapis.com/auth/drive']
 SERVICE_ACCOUNT_FILE = os.environ.get('DRIVE_SERVICE_ACCOUNT')
 PARENT_FOLDER_ID = os.environ.get('DRIVE_FOLDER_ID')
 
-CREDS = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+CREDS = service_account.Credentials.from_service_account_file(
+    SERVICE_ACCOUNT_FILE,
+    scopes=SCOPES
+)
 SERVICE = build('drive', 'v3', credentials=CREDS)
 
 
@@ -20,7 +23,9 @@ def upload_message(file: str):
         'parents': [PARENT_FOLDER_ID]
     }
 
-    file_object = SERVICE.files().create(body=file_metadata, media_body=file).execute()
+    file_object = (SERVICE.files()
+                   .create(body=file_metadata, media_body=file)
+                   .execute())
     return file_object.get('id')
 
 

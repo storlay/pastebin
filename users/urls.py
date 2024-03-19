@@ -1,5 +1,9 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
-from .views import *
+
+from users.views import LoginUserView, RegisterUserView, UpdateUserView, UserPasswordChangeView, \
+    UserPasswordChangeDoneView, UserPasswordResetView, UserPasswordResetDoneView, UserPasswordResetConfirmView, \
+    UserPasswordResetCompleteView, DeleteProfileView, DeleteProfileDoneView
 
 urlpatterns = [
     path('login/', LoginUserView.as_view(), name='login'),
@@ -7,14 +11,22 @@ urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),
     path('profile/', UpdateUserView.as_view(), name='profile'),
 
-    path('password-change/', UserPasswordChangeView.as_view(), name='password_change'),
-    path('password-change/done/', UserPasswordChangeDoneView.as_view(), name='password_change_done'),
+    path('password-change/', UserPasswordChangeView.as_view(),
+         name='password_change'),
+    path('password-change/done/', UserPasswordChangeDoneView.as_view(),
+         name='password_change_done'),
 
-    path('password-reset/', UserPasswordResetView.as_view(), name='password_reset'),
-    path('password-reset/done/', UserPasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('password-reset/<uidb64>/<token>/', UserPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('password-reset/complete/', UserPasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('password-reset/', UserPasswordResetView.as_view(),
+         name='password_reset'),
+    path('password-reset/done/', UserPasswordResetDoneView.as_view(),
+         name='password_reset_done'),
+    path('password-reset/<uidb64>/<token>/', UserPasswordResetConfirmView.as_view(),
+         name='password_reset_confirm'),
+    path('password-reset/complete/', UserPasswordResetCompleteView.as_view(),
+         name='password_reset_complete'),
 
-    path('delete-profile/', DeleteProfileView.as_view(), name='delete_profile'),
-    path('delete-profile/done/', DeleteProfileDoneView.as_view(), name='delete_profile_done')
+    path('delete-profile/', DeleteProfileView.as_view(),
+         name='delete_profile'),
+    path('delete-profile/done/', DeleteProfileDoneView.as_view(),
+         name='delete_profile_done')
 ]

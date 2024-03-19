@@ -23,7 +23,8 @@ class InputTextView(FormView):
         uuid_url = uuid.uuid4()
         author = self.request.user if self.request.user.is_authenticated else None
         create_message(form, uuid_url, author)
-        self.success_url = reverse_lazy('show_message', kwargs={'uuid_url': uuid_url})
+        self.success_url = reverse_lazy('show_message',
+                                        kwargs={'uuid_url': uuid_url})
         return super().form_valid(form)
 
 
