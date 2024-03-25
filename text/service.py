@@ -1,9 +1,11 @@
 """
 Functions for interacting with the models"""
 
-from drive.message import upload_message
+from drive.message import GDrive
 from text.hash_generation import hash_encode
 from text.models import Text
+
+Message = GDrive()
 
 
 def create_message(form, uuid_url, author):
@@ -16,7 +18,7 @@ def create_message(form, uuid_url, author):
     message_name = f'{uuid_url}.txt'
     with open(message_name, 'w') as file:
         file.write(message)
-    message_id = upload_message(message_name)
+    message_id = Message.upload(message_name)
     encoded_message_id = hash_encode(message_id)
 
     Text.objects.create(

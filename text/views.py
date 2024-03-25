@@ -11,11 +11,13 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView, DeleteView, TemplateView, FormView
 
-from drive.message import download_message, delete_message
+from drive.message import GDrive
 from text.forms import InputTextForm
 from text.hash_generation import hash_decode
 from text.models import Text
 from text.service import create_message
+
+Message = GDrive()
 
 
 class InputTextView(FormView):
@@ -43,7 +45,7 @@ class ShowMessageView(DetailView):
         context = super().get_context_data(**kwargs)
         message_object = get_object_or_404(Text, uuid_url=self.kwargs['uuid_url'])
         drive_id = hash_decode(message_object.drive_id)
-        context['content'] = download_message(drive_id)
+        context['content'] = Message.download(drive_id)
         return context
 
     def get_object(self, queryset=None):
@@ -85,7 +87,7 @@ class DeleteMessageView(DeleteView):
     def form_valid(self, form):
         message = Text.objects.get(uuid_url=self.kwargs['uuid_url'])
         decoded_hash = hash_decode(message.drive_id)
-        delete_message(decoded_hash)
+        Message.delete(decoded_hash)
         return super().form_valid(form)
 
 
