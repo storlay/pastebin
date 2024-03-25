@@ -1,14 +1,17 @@
 """
 Functions for interacting with the models"""
+from django.contrib.auth import get_user_model
+from django.forms import Form
 
 from drive.message import GDrive
 from text.hash_generation import hash_encode
 from text.models import Text
 
 Message = GDrive()
+User = get_user_model()
 
 
-def create_message(form, uuid_url, author):
+def create_message(form: Form, uuid_url: str, author: User):
     """
     Creating a message
     :param form: completed form
