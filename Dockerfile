@@ -1,12 +1,13 @@
 FROM python:3.11
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV POETRY_VERSION=1.8.2 \
+    POETRY_VIRTUALENVS_CREATE=false \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-RUN pip install -U pip
+RUN pip install "poetry==$POETRY_VERSION"
 
-COPY requirements.txt /temp/requirements.txt
-
-RUN pip install -r /temp/requirements.txt
+COPY poetry.lock pyproject.toml ./
+RUN poetry install --no-root
 
 COPY . .
