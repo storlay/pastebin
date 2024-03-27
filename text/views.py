@@ -49,7 +49,7 @@ class ShowMessageView(DetailView):
         return context
 
     def get_object(self, queryset=None):
-        return Text.objects.get(uuid_url=self.kwargs['uuid_url'])
+        return get_object_or_404(Text, uuid_url=self.kwargs['uuid_url'])
 
 
 @method_decorator(cache_page(15), name='dispatch')
@@ -82,10 +82,10 @@ class DeleteMessageView(DeleteView):
     context_object_name = 'message'
 
     def get_object(self, queryset=None):
-        return Text.objects.get(uuid_url=self.kwargs['uuid_url'])
+        return get_object_or_404(Text, uuid_url=self.kwargs['uuid_url'])
 
     def form_valid(self, form):
-        message = Text.objects.get(uuid_url=self.kwargs['uuid_url'])
+        message = get_object_or_404(Text, uuid_url=self.kwargs['uuid_url'])
         decoded_hash = hash_decode(message.drive_id)
         Message.delete(decoded_hash)
         return super().form_valid(form)
