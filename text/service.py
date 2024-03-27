@@ -4,9 +4,9 @@ Functions for interacting with the models
 import uuid
 
 from django.contrib.auth import get_user_model
-from django.forms import Form
 
 from drive.message import GDrive
+from text.forms import InputTextForm
 from text.hash_generation import hash_encode
 from text.models import Text
 
@@ -14,7 +14,7 @@ Message = GDrive()
 User = get_user_model()
 
 
-def create_message(form: Form, uuid_url: uuid, author: User):
+def create_message(form: InputTextForm, uuid_url: uuid, author: User):
     """
     Creating a message
     :param form: completed form
