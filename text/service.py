@@ -1,5 +1,8 @@
 """
-Functions for interacting with the models"""
+Functions for interacting with the models
+"""
+import uuid
+
 from django.contrib.auth import get_user_model
 from django.forms import Form
 
@@ -11,7 +14,7 @@ Message = GDrive()
 User = get_user_model()
 
 
-def create_message(form: Form, uuid_url: str, author: User):
+def create_message(form: Form, uuid_url: uuid, author: User):
     """
     Creating a message
     :param form: completed form
