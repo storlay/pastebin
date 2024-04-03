@@ -10,7 +10,6 @@ from text.forms import InputTextForm
 from text.hash_generation import hash_encode
 from text.models import Text
 
-Message = GDrive()
 User = get_user_model()
 
 
@@ -24,7 +23,7 @@ def create_message(form: InputTextForm, uuid_url: uuid, author: User):
     message_name = f'{uuid_url}.txt'
     with open(message_name, 'w') as file:
         file.write(message)
-    message_id = Message.upload(message_name)
+    message_id = GDrive.upload(message_name)
     encoded_message_id = hash_encode(message_id)
 
     Text.objects.create(

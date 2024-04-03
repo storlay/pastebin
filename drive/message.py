@@ -21,27 +21,29 @@ class GDrive:
     )
     SERVICE = build('drive', 'v3', credentials=CREDS)
 
-    def upload(self, file: str):
+    @classmethod
+    def upload(cls, file: str):
         """
         Uploading a message to Google Drive
         :param file: file name
         """
         file_metadata = {
             'name': file,
-            'parents': [self.PARENT_FOLDER_ID]
+            'parents': [cls.PARENT_FOLDER_ID]
         }
 
-        file_object = (self.SERVICE.files()
+        file_object = (cls.SERVICE.files()
                        .create(body=file_metadata, media_body=file)
                        .execute())
         return file_object.get('id')
 
-    def download(self, message_id: str):
+    @classmethod
+    def download(cls, message_id: str):
         """
         Downloading a message from Google Drive
         :param message_id: message id
         """
-        request = self.SERVICE.files().get_media(fileId=message_id)
+        request = cls.SERVICE.files().get_media(fileId=message_id)
         file = io.BytesIO()
         downloader = MediaIoBaseDownload(file, request)
         done = False
@@ -49,9 +51,10 @@ class GDrive:
             status, done = downloader.next_chunk()
         return file.getvalue().decode('utf-8')
 
-    def delete(self, message_id: str):
+    @classmethod
+    async def delete(cls, message_id: str):
         """
         Delete a message from Google Drive
         :param message_id: message id
         """
-        self.SERVICE.files().delete(fileId=message_id).execute()
+        cls.SERVICE.files().delete(fileId=message_id).execute()

@@ -17,8 +17,6 @@ from text.hash_generation import hash_decode
 from text.models import Text
 from text.service import create_message
 
-Message = GDrive()
-
 
 class InputTextView(FormView):
     """Message generation"""
@@ -45,7 +43,7 @@ class ShowMessageView(DetailView):
         context = super().get_context_data(**kwargs)
         message_object = get_object_or_404(Text, uuid_url=self.kwargs['uuid_url'])
         drive_id = hash_decode(message_object.drive_id)
-        context['content'] = Message.download(drive_id)
+        context['content'] = GDrive.download(drive_id)
         return context
 
     def get_object(self, queryset=None):
@@ -87,7 +85,7 @@ class DeleteMessageView(DeleteView):
     def form_valid(self, form):
         message = get_object_or_404(Text, uuid_url=self.kwargs['uuid_url'])
         decoded_hash = hash_decode(message.drive_id)
-        Message.delete(decoded_hash)
+        GDrive.delete(decoded_hash)
         return super().form_valid(form)
 
 

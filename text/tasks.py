@@ -9,8 +9,6 @@ from pastebin.celery import app
 from .hash_generation import hash_decode
 from .models import Text
 
-Message = GDrive()
-
 
 @app.task(name='delete_message_drive')
 def delete_message_drive():
@@ -23,5 +21,5 @@ def delete_message_drive():
     )
     for message_id in irrelevant_messages.values_list('drive_id', flat=True):
         decoded_hash = hash_decode(message_id)
-        Message.delete(decoded_hash)
+        GDrive.delete(decoded_hash)
     irrelevant_messages.delete()
