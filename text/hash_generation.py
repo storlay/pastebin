@@ -5,7 +5,7 @@ Hash generation and decoding
 from base64 import b64encode, b64decode
 
 
-def hash_encode(message_id: str):
+def hash_encode(message_id: str) -> str:
     """
     Encoding of the message id
     :param message_id: message id
@@ -16,7 +16,7 @@ def hash_encode(message_id: str):
     return base64_message_id
 
 
-def hash_decode(message_hash: str):
+def hash_decode(message_hash: str) -> str:
     """
     Decoding the hash of the message id
     :param message_hash: hash of the message id

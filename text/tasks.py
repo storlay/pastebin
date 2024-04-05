@@ -11,7 +11,7 @@ from .models import Text
 
 
 @app.task(name='delete_message_drive')
-def delete_message_drive():
+def delete_message_drive() -> None:
     """
     Deleting temporary messages that have expired
     """

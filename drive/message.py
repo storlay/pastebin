@@ -22,7 +22,7 @@ class GDrive:
     SERVICE = build('drive', 'v3', credentials=CREDS)
 
     @classmethod
-    def upload(cls, file: str):
+    def upload(cls, file: str) -> str:
         """
         Uploading a message to Google Drive
         :param file: file name
@@ -38,7 +38,7 @@ class GDrive:
         return file_object.get('id')
 
     @classmethod
-    def download(cls, message_id: str):
+    def download(cls, message_id: str) -> str:
         """
         Downloading a message from Google Drive
         :param message_id: message id
@@ -52,7 +52,7 @@ class GDrive:
         return file.getvalue().decode('utf-8')
 
     @classmethod
-    async def delete(cls, message_id: str):
+    async def delete(cls, message_id: str) -> None:
         """
         Delete a message from Google Drive
         :param message_id: message id

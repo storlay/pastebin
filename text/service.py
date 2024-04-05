@@ -13,7 +13,11 @@ from text.models import Text
 User = get_user_model()
 
 
-def create_message(form: InputTextForm, uuid_url: uuid, author: User):
+def create_message(
+        form: InputTextForm,
+        uuid_url: uuid,
+        author: User
+) -> None:
     """
     Creating a message
     :param form: completed form
