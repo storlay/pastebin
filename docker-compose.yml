@@ -45,7 +45,7 @@ services:
       - ./:/app
     env_file:
       - ./.env
-    command: 'celery -A pastebin worker -l info'
+    command: 'celery -A pastebin worker -l warning'
     depends_on:
       - redis
       - webapp
@@ -61,7 +61,7 @@ services:
       - ./:/app
     env_file:
       - ./.env
-    command: 'celery -A pastebin beat -l info'
+    command: 'celery -A pastebin beat -l warning'
     depends_on:
       - redis
       - webapp
