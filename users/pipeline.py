@@ -5,14 +5,9 @@ Custom Pipelines
 from django.contrib.auth.models import Group
 
 
-def new_users_handler(
-        backend,
-        user,
-        response,
-        *args,
-        **kwargs
-) -> None:
+def new_users_handler(backend, user, response, *args, **kwargs) -> None:
     """Adding a user to a group if they are logged in using social networks"""
-    group = Group.objects.filter(name='Social')
+
+    group = Group.objects.filter(name="Social")
     if len(group):
         user.groups.add(group[0])

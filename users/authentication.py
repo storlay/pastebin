@@ -12,11 +12,7 @@ class EmailAuthenticationBackend(BaseBackend):
     """Email authentication"""
 
     def authenticate(
-            self,
-            request,
-            username=None,
-            password=None,
-            **kwargs
+        self, request, username=None, password=None, **kwargs
     ) -> User | None:
         try:
             user_object = User.objects.get(email=username)
