@@ -72,6 +72,7 @@ vine = "5.1.0"
 wcwidth = "0.2.13"
 isort = "^5.13.2"
 black = "^24.4.2"
+sentry-sdk = {extras = ["django"], version = "^2.1.1"}
 
 
 [build-system]
