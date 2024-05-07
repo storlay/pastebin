@@ -10,7 +10,7 @@ services:
       - ./static:/app/static
     env_file:
       - ./.env
-    command: bash entrypoint.sh
+    command: [ "docker/webapp.sh" ]
     depends_on:
       - db
     networks:
@@ -45,7 +45,7 @@ services:
       - ./:/app
     env_file:
       - ./.env
-    command: 'celery -A pastebin worker -l warning'
+    command: [ "docker/celery.sh", "worker" ]
     depends_on:
       - redis
       - webapp
@@ -61,7 +61,7 @@ services:
       - ./:/app
     env_file:
       - ./.env
-    command: 'celery -A pastebin beat -l warning'
+    command: [ "docker/celery.sh", "beat" ]
     depends_on:
       - redis
       - webapp
@@ -75,7 +75,7 @@ services:
     container_name: flower
     env_file:
       - ./.env
-    command: 'celery -A pastebin flower'
+    command: [ "docker/celery.sh", "flower" ]
     volumes:
       - ./:/app
     ports:
